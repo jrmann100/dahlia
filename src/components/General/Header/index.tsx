@@ -2,7 +2,15 @@ import {
   Menu as MenuIcon,
   AccountCircle as AccountCircleIcon,
 } from '@mui/icons-material';
-import { AppBar, IconButton, Toolbar, Typography } from '@mui/material';
+import {
+  AppBar,
+  Avatar,
+  Button,
+  IconButton,
+  Toolbar,
+  Typography,
+} from '@mui/material';
+import { pink } from '@mui/material/colors';
 import { type FC } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -40,14 +48,11 @@ const Header: FC<{ toggleMenu: () => void }> = ({ toggleMenu }) => {
           >
             Dashboard
           </Typography>
-          <IconButton
-            color="inherit"
-            onClick={() => {
-              navigate('/account');
-            }}
-          >
-            <AccountCircleIcon />
-          </IconButton>
+          <Button>
+            <Avatar sx={{ bgcolor: pink[400] }}>
+              <AccountCircleIcon />
+            </Avatar>
+          </Button>
         </Toolbar>
       </AppBar>
     </>
