@@ -8,9 +8,12 @@ import {
 } from '@mui/material';
 import { Unsubscribe } from '@mui/icons-material';
 
-const Sidebar: FC<{ open: boolean }> = ({ open }) => (
+const Sidebar: FC<{ toggleMenu: () => void; open: boolean }> = ({
+  toggleMenu,
+  open,
+}) => (
   <>
-    <Drawer>
+    <Drawer open={open} onClose={toggleMenu}>
       <List component="nav">
         <ListItemButton>
           <ListItemIcon>

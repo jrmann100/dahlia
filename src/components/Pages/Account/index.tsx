@@ -1,4 +1,5 @@
+import Post from 'components/Common/Post';
 import { type FC } from 'react';
 
-const Home: FC = () => <>account</>;
-export default Home;
+const Account: FC = () => <>account</>;
+export default Account;

@@ -1,20 +1,25 @@
 import Header from '../Header';
-import { type FC } from 'react';
+import { useState, type FC, useCallback } from 'react';
 import Sidebar from 'components/General/Sidebar';
 import Main from 'components/General/Main';
 import { CssBaseline, ThemeProvider, createTheme } from '@mui/material';
 
 const theme = createTheme();
 
-const Layout: FC = () => (
-  <>
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Sidebar open />
-      <Header />
-      <Main />
-    </ThemeProvider>
-  </>
-);
-
+const Layout: FC = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const toggleMenu = useCallback(() => {
+    setMenuOpen((prev) => !prev);
+  }, []);
+  return (
+    <>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Sidebar toggleMenu={toggleMenu} open={menuOpen} />
+        <Header toggleMenu={toggleMenu} />
+        <Main />
+      </ThemeProvider>
+    </>
+  );
+};
 export default Layout;

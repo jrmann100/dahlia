@@ -1,4 +1,9 @@
+import Post from 'components/Common/Post';
 import { type FC } from 'react';
 
-const Home: FC = () => <>home</>;
+const Home: FC = () => (
+  <>
+    <Post />
+  </>
+);
 export default Home;
