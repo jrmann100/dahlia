@@ -1,5 +1,5 @@
 {
-  "Print to console": {
+  "Functional component": {
     "isFileTemplate": true,
     "scope": "typescriptreact",
     "prefix": "fc",
