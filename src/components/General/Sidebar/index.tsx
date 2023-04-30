@@ -1,32 +1,24 @@
-import Drawer, {
-  DrawerHeader,
-  DrawerTitle,
-  DrawerAppContent,
-  DrawerContent,
-} from '@material/react-drawer';
 import { type FC } from 'react';
-import MaterialIcon from '@material/react-material-icon';
-import List, {
-  ListItem,
-  ListItemGraphic,
+import Drawer from '@mui/material/Drawer';
+import {
+  List,
+  ListItemButton,
+  ListItemIcon,
   ListItemText,
-} from '@material/react-list';
+} from '@mui/material';
+import { Unsubscribe } from '@mui/icons-material';
 
 const Sidebar: FC<{ open: boolean }> = ({ open }) => (
   <>
     <Drawer>
-      <DrawerHeader>
-        <DrawerTitle tag="h2">jane.smith@gmail.com</DrawerTitle>
-      </DrawerHeader>
-
-      <DrawerContent>
-        <List singleSelection selectedIndex={this.state.selectedIndex}>
-          <ListItem>
-            <ListItemGraphic graphic={<MaterialIcon icon="folder" />} />
-            <ListItemText primaryText="Mail" />
-          </ListItem>
-        </List>
-      </DrawerContent>
+      <List component="nav">
+        <ListItemButton>
+          <ListItemIcon>
+            <Unsubscribe />
+          </ListItemIcon>
+          <ListItemText primary="Unsubscribe" />
+        </ListItemButton>
+      </List>
     </Drawer>
   </>
 );

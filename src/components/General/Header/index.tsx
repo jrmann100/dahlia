@@ -1,39 +1,32 @@
-import MaterialIcon from '@material/react-material-icon';
-import TopAppBar, {
-  TopAppBarFixedAdjust,
-  TopAppBarIcon,
-  TopAppBarRow,
-  TopAppBarSection,
-  TopAppBarTitle,
-} from '@material/react-top-app-bar';
+import {
+  Menu as MenuIcon,
+  AccountCircle as AccountCircleIcon,
+} from '@mui/icons-material';
+import { AppBar, IconButton, Toolbar, Typography } from '@mui/material';
 import { type FC } from 'react';
-import { Link } from 'react-router-dom';
+import { redirect } from 'react-router-dom';
 
 const Header: FC = () => (
   <>
-    <TopAppBar>
-      <TopAppBarRow>
-        <TopAppBarSection align="start">
-          <TopAppBarIcon navIcon tabIndex={0}>
-            <MaterialIcon
-              icon="menu"
-              onClick={() => {
-                console.log('click');
-              }}
-            />
-          </TopAppBarIcon>
-          <TopAppBarTitle>Dahlia</TopAppBarTitle>
-        </TopAppBarSection>
-        <TopAppBarSection align="end" role="toolbar">
-          <TopAppBarIcon actionItem tabIndex={0}>
-            <Link to="/account">
-              <MaterialIcon aria-label="account" icon="account_circle" />
-            </Link>
-          </TopAppBarIcon>
-        </TopAppBarSection>
-      </TopAppBarRow>
-    </TopAppBar>
-    <TopAppBarFixedAdjust />
+    <AppBar position="absolute">
+      <Toolbar>
+        <IconButton edge="start" color="inherit" aria-label="open drawer">
+          <MenuIcon />
+        </IconButton>
+        <Typography
+          component="h1"
+          variant="h6"
+          color="inherit"
+          noWrap
+          sx={{ flexGrow: 1 }}
+        >
+          Dashboard
+        </Typography>
+        <IconButton color="inherit" onClick={() => redirect('/account')}>
+          <AccountCircleIcon />
+        </IconButton>
+      </Toolbar>
+    </AppBar>
   </>
 );
 
