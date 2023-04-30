@@ -1,23 +1,25 @@
 import { getAuth, onAuthStateChanged, type User } from '@firebase/auth';
-import { createContext, type FC, useEffect, useState } from 'react';
+import { createContext, type FC, useEffect, useState, useContext } from 'react';
+import snack from 'util/notify';
 
-const AuthContext = createContext<{ user: User | null; isLoggedIn: boolean }>({
+interface AuthContextValue {
+  user: User | null;
+}
+
+const AuthContext = createContext<AuthContextValue>({
   user: null,
-  isLoggedIn: false,
 });
 
 const AuthContextProvider: FC = (props) => {
   const [user, setUser] = useState<User | null>(null);
   const auth = getAuth();
-  useEffect(
-    () => onAuthStateChanged(auth, setUser, console.error /* todo */),
-    [auth]
-  );
-  return (
-    <AuthContext.Provider
-      value={{ user, isLoggedIn: user !== null }}
-      {...props}
-    />
-  );
+  useEffect(() => onAuthStateChanged(auth, setUser, snack.catch), [auth]);
+  return <AuthContext.Provider value={{ user }} {...props} />;
 };
+
+export const useAuth = (): AuthContextValue & { isLoggedIn: boolean } => {
+  const { user, ...context } = useContext(AuthContext);
+  return { user, isLoggedIn: user !== null, ...context };
+};
+
 export default AuthContextProvider;
