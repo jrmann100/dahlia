@@ -11,6 +11,7 @@ import {
   Typography,
 } from '@mui/material';
 import { pink } from '@mui/material/colors';
+import pages from 'components/pages/pages';
 import { type FC } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -48,7 +49,11 @@ const Header: FC<{ toggleMenu: () => void }> = ({ toggleMenu }) => {
           >
             Dashboard
           </Typography>
-          <Button>
+          <Button
+            onClick={() => {
+              navigate(`/me`);
+            }}
+          >
             <Avatar sx={{ bgcolor: pink[400] }}>
               <AccountCircleIcon />
             </Avatar>

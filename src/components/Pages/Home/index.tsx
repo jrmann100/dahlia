@@ -1,4 +1,4 @@
-import Post from 'components/Common/Post';
+import Post from './Post';
 import { type FC } from 'react';
 
 const Home: FC = () => (

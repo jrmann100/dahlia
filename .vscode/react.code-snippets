@@ -1,0 +1,9 @@
+{
+  "Print to console": {
+    "isFileTemplate": true,
+    "scope": "typescriptreact",
+    "prefix": "fc",
+    "body": "import { type FC } from 'react';\n\nconst ${1:Component}: FC = () => ${2:<>$0</>};\nexport default $1;",
+    "description": "Create functional component"
+  }
+}
