@@ -10,9 +10,9 @@ const App: FC = () => (
     <AuthContextProvider>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<Navigate to="/home" replace />} />{' '}
+          <Route index element={<Navigate to="/home" replace />} />
           {Object.entries(pages).map(
-            ([path, { component, needsAuth, ...props }]) => (
+            ([path, { component, needsAuth = false, ...props }]) => (
               <Route
                 key={path}
                 path={path}
