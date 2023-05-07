@@ -1,4 +1,3 @@
-import 'util/firebase/config';
 import { getAuth, onAuthStateChanged, type User } from '@firebase/auth';
 import {
   createContext,
@@ -7,8 +6,8 @@ import {
   useState,
   useContext,
   type PropsWithChildren,
+  useMemo,
 } from 'react';
-import { Navigate } from 'react-router-dom';
 import snack from 'util/notify';
 
 interface AuthContextValue {
@@ -21,10 +20,11 @@ const AuthContext = createContext<AuthContextValue>({
 
 export const auth = getAuth();
 
-export const AuthContextProvider: FC<PropsWithChildren> = (props) => {
+export const AuthContextProvider: FC<PropsWithChildren> = ({ children }) => {
   const [user, setUser] = useState<User | null | undefined>(undefined);
   useEffect(() => onAuthStateChanged(auth, setUser, snack.catch), []);
-  return <AuthContext.Provider value={{ user }} {...props} />;
+  const value = useMemo(() => ({ user }), [user]);
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 
 export const useAuth = (): AuthContextValue & {
@@ -38,21 +38,4 @@ export const useAuth = (): AuthContextValue & {
     isLoadingAuth: user === undefined,
     ...context,
   };
-};
-
-export const Protect: FC<
-  PropsWithChildren<{ enabled: boolean; path: string }>
-> = ({ children, path, enabled = true }) => {
-  const { isAuthenticated, isLoadingAuth } = useAuth();
-  return (
-    <>
-      {!enabled || isAuthenticated ? (
-        children
-      ) : isLoadingAuth ? (
-        <>Logging in&hellip; {/* todo: replace with skel */}</>
-      ) : (
-        <Navigate to="/login" state={{ next: path }} replace />
-      )}
-    </>
-  );
 };
