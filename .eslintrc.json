@@ -8,6 +8,9 @@
     "standard-with-typescript",
     "react-app",
     "react-app/jest",
+    "airbnb",
+    "airbnb-typescript",
+    "airbnb/hooks",
     "prettier"
   ],
   "overrides": [],
@@ -18,8 +21,19 @@
   },
   "plugins": ["react", "prettier"],
   "rules": {
-    "react/self-closing-comp": "warn",
     "prettier/prettier": "warn",
-    "react/react-in-jsx-scope": "off"
+    "react/react-in-jsx-scope": "off",
+    // checkme
+    "react/function-component-definition": [
+      "error",
+      {
+        "namedComponents": ["arrow-function"]
+      }
+    ],
+    // https://github.com/jsx-eslint/eslint-plugin-react/issues/2584
+    "react/jsx-no-useless-fragment": ["warn", { "allowExpressions": true }],
+    // https://github.com/jsx-eslint/eslint-plugin-react/issues/2396
+    "react/require-default-props": "off",
+    "@typescript-eslint/no-unused-vars": "warn"
   }
 }
