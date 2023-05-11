@@ -3,12 +3,12 @@ import { getFirestore } from 'firebase/firestore/lite';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: 'AIzaSyBzCA07j7O9zqRPS1jnaucH3vCGlpmYF38',
-  authDomain: 'dali-link.firebaseapp.com',
-  projectId: 'dali-link',
-  storageBucket: 'dali-link.appspot.com',
-  messagingSenderId: '1078229731902',
-  appId: '1:1078229731902:web:32a9f3df68275d719adf6f',
+  apiKey: 'AIzaSyBVZaa9YT2o0pfuvb5-C3gmTKx00kAfRuY',
+  authDomain: 'dahlia-23208.firebaseapp.com',
+  projectId: 'dahlia-23208',
+  storageBucket: 'dahlia-23208.appspot.com',
+  messagingSenderId: '407922669447',
+  appId: '1:407922669447:web:54ed9f3602fe3532f18522',
 };
 
 // Initialize Firebase
