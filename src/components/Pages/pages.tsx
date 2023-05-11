@@ -4,10 +4,18 @@ import People from 'components/pages/People';
 import Login from 'components/pages/Login';
 import { type ReactNode } from 'react';
 
-const pages: Record<string, { component: ReactNode; needsAuth?: boolean }> = {
-  home: { component: <Home />, needsAuth: true },
-  me: { component: <Me />, needsAuth: true },
-  people: { component: <People />, needsAuth: true },
-  login: { component: <Login /> },
+const pages: Record<
+  string,
+  { path: string; component: ReactNode; needsAuth?: boolean; title: string }
+> = {
+  home: { path: '/home', component: <Home />, needsAuth: true, title: 'Home' },
+  me: { path: '/me', component: <Me />, needsAuth: true, title: 'Profile' },
+  people: {
+    path: '/people',
+    component: <People />,
+    needsAuth: true,
+    title: 'People',
+  },
+  login: { path: '/login', component: <Login />, title: 'Log in' },
 };
 export default pages;

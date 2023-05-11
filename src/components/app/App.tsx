@@ -1,34 +1,37 @@
+import 'util/firebase/config';
 import 'assets/include.scss';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import Layout from 'components/app/Layout';
 import { type FC } from 'react';
 import pages from 'components/pages/pages';
-import { AuthContextProvider, Protect } from 'util/firebase/auth';
+import { AuthContextProvider } from 'util/firebase/auth';
+import { AppContextProvider } from 'util/context';
+import Page from 'components/app/Page';
+import Protect from 'components/app/Protect';
 
 const App: FC = () => (
-  <>
+  <AppContextProvider>
     <AuthContextProvider>
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Navigate to="/home" replace />} />
-          {Object.entries(pages).map(
-            ([path, { component, needsAuth = false, ...props }]) => (
+          {Object.values(pages).map(
+            ({ path, component, title, needsAuth = false }) => (
               <Route
                 key={path}
                 path={path}
                 element={
                   <Protect enabled={needsAuth} path={path}>
-                    {component}
+                    <Page title={title}>{component}</Page>
                   </Protect>
                 }
-                {...props}
               />
             )
           )}
-          <Route path="*" element={<>404</>} />
+          <Route path="*" element={<Page title="404">404</Page>} />
         </Route>
       </Routes>
     </AuthContextProvider>
-  </>
+  </AppContextProvider>
 );
 export default App;
