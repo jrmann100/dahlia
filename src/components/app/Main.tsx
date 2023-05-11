@@ -12,12 +12,13 @@ const Main: FC = () => (
           ? theme.palette.grey[100]
           : theme.palette.grey[900],
       flexGrow: 1,
-      height: '100vh',
       overflow: 'auto',
+      display: 'flex',
+      flexDirection: 'column',
     }}
   >
     <AppBarOffset />
-    <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+    <Container sx={{ p: 4, flexGrow: 1 }}>
       <Outlet />
     </Container>
   </Box>
