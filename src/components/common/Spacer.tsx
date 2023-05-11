@@ -1,8 +1,7 @@
-import { type PropsWithChildren, type FC, type CSSProperties } from 'react';
+import { type FC, type CSSProperties } from 'react';
 
-const Spacer: FC<
-  PropsWithChildren<{ style?: CSSProperties; basis: string | number }>
-> = ({ children, style, basis, ...props }) => (
-  <div style={{ flex: 1, flexBasis: basis, ...style }} {...props} />
-);
+const Spacer: FC<{ style?: CSSProperties; basis: string | number }> = ({
+  style,
+  basis,
+}) => <div style={{ flex: 1, flexBasis: basis, ...style }} />;
 export default Spacer;

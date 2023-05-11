@@ -6,7 +6,7 @@ const Flexbox: FC<
     centering?: boolean;
     vertical?: boolean;
   }>
-> = ({ children, centering, vertical, style, ...props }) => (
+> = ({ children, centering, vertical, style }) => (
   <div
     style={{
       display: 'flex',
@@ -15,7 +15,6 @@ const Flexbox: FC<
       flexDirection: vertical === true ? 'column' : undefined,
       ...style,
     }}
-    {...props}
   >
     {children}
   </div>
