@@ -3,7 +3,7 @@ import 'assets/include.scss';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import Layout from 'components/app/Layout';
 import { type FC } from 'react';
-import pages from 'components/pages/pages';
+import pages from 'components/pages';
 import { AuthContextProvider } from 'util/firebase/auth';
 import { AppContextProvider } from 'util/context';
 import Page from 'components/app/Page';
@@ -14,7 +14,7 @@ const App: FC = () => (
     <AuthContextProvider>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<Navigate to="/home" replace />} />
+          <Route index element={<Navigate to={pages.home.path} replace />} />
           {Object.values(pages).map(
             ({ path, component, title, needsAuth = false }) => (
               <Route

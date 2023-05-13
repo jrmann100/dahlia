@@ -1,4 +1,4 @@
-import pages from 'components/pages/pages';
+import pages from 'components/pages';
 import { useEffect, type FC, type PropsWithChildren } from 'react';
 import { createSearchParams, useNavigate } from 'react-router-dom';
 import { useAuth } from 'util/firebase/auth';

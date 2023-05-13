@@ -16,6 +16,7 @@ const pages: Record<
     needsAuth: true,
     title: 'People',
   },
+  person: { path: '/people/:id', component: <>person</>, title: 'People' },
   login: { path: '/login', component: <Login />, title: 'Log in' },
 };
 export default pages;
