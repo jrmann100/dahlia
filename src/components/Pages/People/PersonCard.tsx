@@ -37,16 +37,19 @@ const Person: FC<{ id: string; value: APIPerson }> = ({
         component="img"
         alt="green iguana"
         height="300"
+        width="300"
         image={person.picture}
       />
       <CardContent>
-        <Typography variant="body2" color="text.secondary">
-          <Box sx={{ ...spreads.flex }}>
+        <Box sx={{ ...spreads.flex, flexWrap: 'wrap' }}>
+          <Typography variant="body2" color="text.secondary">
             {person.major !== null && `Major: ${person.major}`}
-            <Spacer />
+          </Typography>
+          <Spacer basis="1rem" />
+          <Typography variant="body2" color="text.secondary">
             {person.minor !== null && `Minor: ${person.minor}`}
-          </Box>
-        </Typography>
+          </Typography>
+        </Box>
       </CardContent>
     </CardActionArea>
   </Card>

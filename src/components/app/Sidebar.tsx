@@ -7,7 +7,6 @@ import {
   ListItemText,
   Toolbar,
 } from '@mui/material';
-import { Home, People } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 import pages from 'components/pages';
 import spreads from 'util/spreads';
@@ -33,23 +32,20 @@ const Sidebar: FC = () => {
     >
       <Toolbar />
       <List component="nav">
-        <Link style={spreads.resetLink} to={pages.home.path}>
-          <ListItemButton>
-            {/* todo: highlight/bold matching route sx={{ bgcolor: (theme) => theme.palette.grey[200] }} */}
-            <ListItemIcon>
-              <Home />
-            </ListItemIcon>
-            <ListItemText primary="Home" />
-          </ListItemButton>
-        </Link>
-        <Link style={spreads.resetLink} to={pages.people.path}>
-          <ListItemButton>
-            <ListItemIcon>
-              <People />
-            </ListItemIcon>
-            <ListItemText primary="People" />
-          </ListItemButton>
-        </Link>
+        {Object.values(pages).map(
+          ({ path, title, sidebarIcon: Icon }) =>
+            Icon !== undefined && (
+              <Link key={path} style={spreads.resetLink} to={path}>
+                <ListItemButton>
+                  {/* todo: highlight/bold matching route sx={{ bgcolor: (theme) => theme.palette.grey[200] }} */}
+                  <ListItemIcon>
+                    <Icon />
+                  </ListItemIcon>
+                  <ListItemText primary={title} />
+                </ListItemButton>
+              </Link>
+            )
+        )}
       </List>
     </Drawer>
   );
