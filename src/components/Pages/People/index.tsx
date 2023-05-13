@@ -1,3 +1,4 @@
+import { Grid } from '@mui/material';
 import Person from 'components/pages/People/PersonCard';
 import { collection, getDocs } from 'firebase/firestore/lite';
 import { useEffect, type FC, useState } from 'react';
@@ -24,11 +25,13 @@ const People: FC = () => {
   }, []);
 
   return (
-    <>
+    <Grid container spacing={2} justifyContent="space-around">
       {people.map(({ id, person }) => (
-        <Person id={id} value={person} />
+        <Grid item key={id} flexGrow={1} flexShrink={0}>
+          <Person id={id} value={person} />
+        </Grid>
       ))}
-    </>
+    </Grid>
   );
 };
 export default People;
