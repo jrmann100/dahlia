@@ -10,10 +10,11 @@ import {
 import { Link } from 'react-router-dom';
 import pages from 'components/pages';
 import spreads from 'util/spreads';
-import { useSidebar } from 'util/context';
+import { usePouch } from 'util/pouch';
+import { AppContext } from 'util/context';
 
 const Sidebar: FC = () => {
-  const [expanded] = useSidebar();
+  const [expanded] = usePouch(AppContext, 'sidebarExpanded');
   const drawerWidth = expanded ? 200 : 0;
   const transition = 'width 0.2s';
   return (

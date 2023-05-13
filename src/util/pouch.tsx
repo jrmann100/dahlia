@@ -6,9 +6,10 @@ import {
   useMemo,
   type Context,
   useCallback,
+  useContext,
 } from 'react';
 
-type PouchUpdater<T> = (updatedValues: Partial<T> | ((prev: T) => T)) => void;
+type PouchUpdater<T> = React.Dispatch<React.SetStateAction<T>>;
 
 type PouchWithUpdater<T> = T & {
   update: PouchUpdater<T>;
@@ -24,15 +25,7 @@ export const createPouch = <T,>(
   });
 
   const PouchProvider: FC<PropsWithChildren> = ({ children }) => {
-    const [contents, setContents] = useState<T>(defaults);
-
-    const update = useCallback<PouchUpdater<T>>((updates) => {
-      if (typeof updates === 'function') {
-        setContents(updates);
-      } else {
-        setContents((prev) => ({ ...prev, ...updates }));
-      }
-    }, []);
+    const [contents, update] = useState<T>(defaults);
 
     const value = useMemo(
       () => ({
@@ -53,4 +46,24 @@ export const createPouch = <T,>(
   return [Pouch, PouchProvider];
 };
 
-export default createPouch;
+/**
+ * Getter/setter for the app title.
+ * @param initialTitle The current page title to set in app context.
+ * @returns The current page title, from app context, and its setter.
+ */
+export const usePouch = <T, K extends keyof T>(
+  pouch: Context<PouchWithUpdater<T>>,
+  key: K
+): [T[K], (value: T[K]) => void] => {
+  const { update, ...contents } = useContext(pouch);
+  const value = (contents as T)[key];
+
+  const setValue = useCallback(
+    (newValue: T[K]): void => {
+      update((prev) => ({ ...prev, [key]: newValue }));
+    },
+    [update, key]
+  );
+
+  return [value, setValue];
+};

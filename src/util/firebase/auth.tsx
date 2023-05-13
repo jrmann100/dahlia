@@ -2,7 +2,7 @@ import { getAuth, onAuthStateChanged, type User } from '@firebase/auth';
 import { useEffect, useContext, useCallback } from 'react';
 import { type APIPerson } from 'util/api';
 import snack from 'util/notify';
-import createPouch from 'util/pouch';
+import { createPouch } from 'util/pouch';
 
 type NullableUser = User | null | undefined;
 interface AuthContextValue {
@@ -21,7 +21,7 @@ export const [AuthContext, AuthContextProvider] = createPouch<AuthContextValue>(
     const { update } = useContext(AuthContext);
     const setUser = useCallback(
       (newUser: User | null): void => {
-        update({ user: newUser });
+        update((prev) => ({ ...prev, user: newUser }));
       },
       [update]
     );

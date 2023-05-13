@@ -3,14 +3,15 @@ import { doc, getDoc } from 'firebase/firestore/lite';
 import { useState, type FC, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { type APIPerson } from 'util/api';
-import { useTitle } from 'util/context';
+import { AppContext } from 'util/context';
 import { db } from 'util/firebase/config';
 import snack from 'util/notify';
+import { usePouch } from 'util/pouch';
 
 const Person: FC = () => {
   const { id } = useParams();
   const [person, setPerson] = useState<APIPerson | null | undefined>();
-  const [, setTitle] = useTitle();
+  const [, setTitle] = usePouch(AppContext, 'pageTitle');
   useEffect(
     () => () => {
       if (person !== undefined && person !== null) setTitle(person.name);

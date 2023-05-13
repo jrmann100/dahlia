@@ -12,12 +12,16 @@ import {
 } from '@mui/material';
 import { type FC } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useSidebar, useTitle } from 'util/context';
+import { AppContext } from 'util/context';
+import { usePouch } from 'util/pouch';
 
 const Header: FC = () => {
   const navigate = useNavigate();
-  const [title] = useTitle();
-  const [, toggleSidebar] = useSidebar();
+  const [title] = usePouch(AppContext, 'pageTitle');
+  const [sidebarExpanded, setSidebarExpanded] = usePouch(
+    AppContext,
+    'sidebarExpanded'
+  );
   return (
     <AppBar
       position="fixed"
@@ -29,7 +33,7 @@ const Header: FC = () => {
           color="inherit"
           aria-label="open drawer"
           onClick={() => {
-            toggleSidebar();
+            setSidebarExpanded(!sidebarExpanded);
           }}
         >
           <MenuIcon />
