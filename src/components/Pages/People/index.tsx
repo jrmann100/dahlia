@@ -1,7 +1,6 @@
-import Person from 'components/pages/People/Person';
+import Person from 'components/pages/People/PersonCard';
 import { collection, getDocs } from 'firebase/firestore/lite';
 import { useEffect, type FC, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { type APIPerson } from 'util/api';
 import { db } from 'util/firebase/config';
 import snack from 'util/notify';

@@ -32,7 +32,6 @@ const Login: FC = () => {
       .then((result) => {
         if (result === null) {
           // go to google
-          console.log('can continue...');
           setCanContinue(true);
         }
       })
