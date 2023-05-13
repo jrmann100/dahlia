@@ -1,6 +1,7 @@
 import { Box, Container, styled } from '@mui/material';
 import { type FC } from 'react';
 import { Outlet } from 'react-router-dom';
+import spreads from 'util/spreads';
 
 const AppBarOffset = styled('div')(({ theme }) => theme.mixins.toolbar);
 const Main: FC = () => (
@@ -11,9 +12,9 @@ const Main: FC = () => (
         theme.palette.mode === 'light'
           ? theme.palette.grey[100]
           : theme.palette.grey[900],
-      flexGrow: 1,
+      ...spreads.fill,
       overflow: 'auto',
-      display: 'flex',
+      ...spreads.flex,
       flexDirection: 'column',
     }}
   >
