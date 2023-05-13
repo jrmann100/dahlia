@@ -9,11 +9,12 @@ export const Protect: FC<
   const navigate = useNavigate();
   const { isAuthenticated, isLoadingAuth } = useAuth();
   useEffect(() => {
-    if (!isLoadingAuth && !isAuthenticated && enabled)
+    if (!isLoadingAuth && !isAuthenticated && enabled) {
       navigate({
         pathname: pages.login.path,
         search: createSearchParams({ next: path }).toString(),
       });
+    }
   }, [enabled, isAuthenticated, isLoadingAuth, navigate, path]);
 
   return (
