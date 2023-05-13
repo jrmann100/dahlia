@@ -13,19 +13,25 @@ import {
 import { pink } from '@mui/material/colors';
 import { type FC } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useTitle } from 'util/context';
+import { useSidebar, useTitle } from 'util/context';
 
-const Header: FC<{ toggleMenu: () => void }> = ({ toggleMenu }) => {
+const Header: FC = () => {
   const navigate = useNavigate();
   const [title] = useTitle();
+  const [, toggleSidebar] = useSidebar();
   return (
-    <AppBar position="absolute">
+    <AppBar
+      position="fixed"
+      sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
+    >
       <Toolbar sx={{ gap: '0.5em' }}>
         <IconButton
           edge="start"
           color="inherit"
           aria-label="open drawer"
-          onClick={toggleMenu}
+          onClick={() => {
+            toggleSidebar();
+          }}
         >
           <MenuIcon />
         </IconButton>
