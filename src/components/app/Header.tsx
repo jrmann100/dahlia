@@ -17,7 +17,7 @@ import { useTitle } from 'util/context';
 
 const Header: FC<{ toggleMenu: () => void }> = ({ toggleMenu }) => {
   const navigate = useNavigate();
-  const title = useTitle();
+  const [title] = useTitle();
   return (
     <AppBar position="absolute">
       <Toolbar sx={{ gap: '0.5em' }}>

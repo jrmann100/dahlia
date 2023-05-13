@@ -6,6 +6,7 @@ import {
   useState,
   useEffect,
   useMemo,
+  useCallback,
 } from 'react';
 
 interface AppContextValue {
@@ -31,15 +32,23 @@ export const AppContextProvider: FC<PropsWithChildren> = ({ children }) => {
 
 /**
  * Getter/setter for the app title.
- * @param title The current page title to set in app context.
+ * @param initialTitle The current page title to set in app context.
  * @returns The current page title, from app context.
  */
-export const useTitle = (title?: string): string => {
+export const useTitle = (
+  initialTitle?: string
+): [string, (title: string) => void] => {
   const { pageTitle, setAppContext } = useContext(AppContext);
-  useEffect(() => {
-    if (title !== undefined) {
+  const setTitle = useCallback(
+    (title: string): void => {
       setAppContext((prev) => ({ ...prev, pageTitle: title }));
+    },
+    [setAppContext]
+  );
+  useEffect(() => {
+    if (initialTitle !== undefined) {
+      setTitle(initialTitle);
     }
-  }, [setAppContext, title]);
-  return pageTitle;
+  }, [setAppContext, initialTitle, setTitle]);
+  return [pageTitle, setTitle];
 };
