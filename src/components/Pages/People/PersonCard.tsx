@@ -11,6 +11,8 @@ import { type FC } from 'react';
 import { Link } from 'react-router-dom';
 import { getPersonPosition, type APIPerson } from 'util/api';
 import pages from 'components/pages';
+import Spacer from 'components/common/Spacer';
+import Flexbox from 'components/common/Flexbox';
 
 const Person: FC<{ id: string; value: APIPerson }> = ({
   id,
@@ -38,7 +40,11 @@ const Person: FC<{ id: string; value: APIPerson }> = ({
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
-          {JSON.stringify(person.core)}
+          <Flexbox>
+            {person.major !== undefined && `Major: ${person.major}`}
+            <Spacer />
+            {person.minor !== undefined && `Minor: ${person.minor}`}
+          </Flexbox>
         </Typography>
       </CardContent>
     </CardActionArea>
