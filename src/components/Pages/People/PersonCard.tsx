@@ -1,5 +1,6 @@
 import {
   Avatar,
+  Box,
   Card,
   CardActionArea,
   CardContent,
@@ -12,13 +13,13 @@ import { Link } from 'react-router-dom';
 import { getPersonPosition, type APIPerson } from 'util/api';
 import pages from 'components/pages';
 import Spacer from 'components/common/Spacer';
-import Flexbox from 'components/common/Flexbox';
+import spreads from 'util/spreads';
 
 const Person: FC<{ id: string; value: APIPerson }> = ({
   id,
   value: person,
 }) => (
-  <Card sx={{ maxWidth: 400 }}>
+  <Card>
     <CardActionArea component={Link} to={pages.person.path.replace(':id', id)}>
       <CardHeader
         avatar={
@@ -40,11 +41,11 @@ const Person: FC<{ id: string; value: APIPerson }> = ({
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
-          <Flexbox>
-            {person.major !== undefined && `Major: ${person.major}`}
+          <Box sx={{ ...spreads.flex }}>
+            {person.major !== null && `Major: ${person.major}`}
             <Spacer />
-            {person.minor !== undefined && `Minor: ${person.minor}`}
-          </Flexbox>
+            {person.minor !== null && `Minor: ${person.minor}`}
+          </Box>
         </Typography>
       </CardContent>
     </CardActionArea>
