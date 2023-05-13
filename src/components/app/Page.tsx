@@ -1,7 +1,7 @@
 import { type PropsWithChildren, type FC } from 'react';
 import { useTitle } from 'util/context';
 
-const Page: FC<PropsWithChildren<{ title: string }>> = ({
+const Page: FC<PropsWithChildren<{ title?: string }>> = ({
   title,
   children,
 }) => {

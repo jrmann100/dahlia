@@ -7,7 +7,7 @@ import Person from 'components/pages/Person';
 
 const pages: Record<
   string,
-  { path: string; component: ReactNode; needsAuth?: boolean; title: string }
+  { path: string; component: ReactNode; needsAuth?: boolean; title?: string }
 > = {
   home: { path: '/home', component: <Home />, needsAuth: true, title: 'Home' },
   me: { path: '/me', component: <Me />, needsAuth: true, title: 'Profile' },
@@ -20,7 +20,6 @@ const pages: Record<
   person: {
     path: '/people/:id',
     component: <Person />,
-    title: 'People',
   },
   login: { path: '/login', component: <Login />, title: 'Log in' },
 };
