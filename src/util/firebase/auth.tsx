@@ -1,41 +1,45 @@
 import { getAuth, onAuthStateChanged, type User } from '@firebase/auth';
-import {
-  createContext,
-  type FC,
-  useEffect,
-  useState,
-  useContext,
-  type PropsWithChildren,
-  useMemo,
-} from 'react';
+import { useEffect, useContext, useCallback } from 'react';
+import { type APIPerson } from 'util/api';
 import snack from 'util/notify';
+import createPouch from 'util/pouch';
 
+type NullableUser = User | null | undefined;
 interface AuthContextValue {
-  user: User | null | undefined;
+  user: NullableUser;
+  profile: APIPerson | null;
 }
-
-const AuthContext = createContext<AuthContextValue>({
-  user: null,
-});
 
 export const auth = getAuth();
 
-export const AuthContextProvider: FC<PropsWithChildren> = ({ children }) => {
-  const [user, setUser] = useState<User | null | undefined>(undefined);
-  useEffect(() => onAuthStateChanged(auth, setUser, snack.catch), []);
-  const value = useMemo(() => ({ user }), [user]);
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
-};
+export const [AuthContext, AuthContextProvider] = createPouch<AuthContextValue>(
+  {
+    user: undefined,
+    profile: null,
+  },
+  () => {
+    const { update } = useContext(AuthContext);
+    const setUser = useCallback(
+      (newUser: User | null): void => {
+        update({ user: newUser });
+      },
+      [update]
+    );
+    useEffect(() => onAuthStateChanged(auth, setUser, snack.catch), [setUser]);
+    return null;
+  }
+);
 
-export const useAuth = (): AuthContextValue & {
+export const useAuth = (): {
+  user: NullableUser;
   isAuthenticated: boolean;
   isLoadingAuth: boolean;
 } => {
-  const { user, ...context } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
+
   return {
     user,
     isAuthenticated: user !== null && user !== undefined,
     isLoadingAuth: user === undefined,
-    ...context,
   };
 };

@@ -1,39 +1,17 @@
-import {
-  type FC,
-  type PropsWithChildren,
-  createContext,
-  useContext,
-  useState,
-  useEffect,
-  useMemo,
-  useCallback,
-} from 'react';
+import { useContext, useEffect, useCallback } from 'react';
+import createPouch from 'util/pouch';
 
 interface AppContextValue {
   pageTitle: string;
   sidebarExpanded: boolean;
 }
 
-export const AppContext = createContext<
-  AppContextValue & {
-    setAppContext: React.Dispatch<React.SetStateAction<AppContextValue>>;
-  }
->({
+export const [AppContext, AppContextProvider] = createPouch<AppContextValue>({
   pageTitle: '',
-  sidebarExpanded: true,
-  setAppContext: () => {},
+  sidebarExpanded: JSON.parse(
+    localStorage.getItem('AppContext.sidebarExpanded') ?? 'true'
+  ),
 });
-
-export const AppContextProvider: FC<PropsWithChildren> = ({ children }) => {
-  const [appContext, setAppContext] = useState<AppContextValue>({
-    pageTitle: '',
-    sidebarExpanded: JSON.parse(
-      localStorage.getItem('AppContext.sidebarExpanded') ?? 'true'
-    ),
-  });
-  const value = useMemo(() => ({ ...appContext, setAppContext }), [appContext]);
-  return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
-};
 
 /**
  * Getter/setter for the app title.
@@ -43,18 +21,18 @@ export const AppContextProvider: FC<PropsWithChildren> = ({ children }) => {
 export const useTitle = (
   initialTitle?: string
 ): [string, (title: string) => void] => {
-  const { pageTitle, setAppContext } = useContext(AppContext);
+  const { pageTitle, update } = useContext(AppContext);
   const setTitle = useCallback(
     (title: string): void => {
-      setAppContext((prev) => ({ ...prev, pageTitle: title }));
+      update({ pageTitle: title });
     },
-    [setAppContext]
+    [update]
   );
   useEffect(() => {
     if (initialTitle !== undefined) {
       setTitle(initialTitle);
     }
-  }, [setAppContext, initialTitle, setTitle]);
+  }, [initialTitle, setTitle]);
   return [pageTitle, setTitle];
 };
 
@@ -63,16 +41,16 @@ export const useTitle = (
  * @returns The current sidebar expanded state, from app context, and its setter/toggler.
  */
 export const useSidebar = (): [boolean, (expanded?: boolean) => void] => {
-  const { sidebarExpanded, setAppContext } = useContext(AppContext);
+  const { sidebarExpanded, update } = useContext(AppContext);
   const setSidebarExpanded = useCallback(
     (expanded: boolean = !sidebarExpanded): void => {
-      setAppContext((prev) => ({ ...prev, sidebarExpanded: expanded }));
+      update({ sidebarExpanded: expanded });
       localStorage.setItem(
         'AppContext.sidebarExpanded',
         JSON.stringify(expanded)
       );
     },
-    [setAppContext, sidebarExpanded]
+    [sidebarExpanded, update]
   );
   return [sidebarExpanded, setSidebarExpanded];
 };

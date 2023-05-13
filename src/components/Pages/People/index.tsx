@@ -1,4 +1,4 @@
-import { Grid } from '@mui/material';
+import { CircularProgress, Grid, LinearProgress } from '@mui/material';
 import Person from 'components/pages/People/PersonCard';
 import { collection, getDocs } from 'firebase/firestore/lite';
 import { useEffect, type FC, useState } from 'react';
@@ -24,7 +24,9 @@ const People: FC = () => {
       .catch(snack.catch);
   }, []);
 
-  return (
+  return people.length === 0 ? (
+    <CircularProgress />
+  ) : (
     <Grid container spacing={2} justifyContent="space-around">
       {people.map(({ id, person }) => (
         <Grid item key={id} flexGrow={1} flexShrink={0}>
