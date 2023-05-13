@@ -8,8 +8,8 @@ import {
 import { auth, useAuth } from 'util/firebase/auth';
 import snack from 'util/notify';
 import pages from 'components/pages';
-import { Button } from '@mui/material';
-import Flexbox from 'components/common/Flexbox';
+import { Box, Button } from '@mui/material';
+import spreads from 'util/spreads';
 
 const Login: FC = () => {
   const navigate = useNavigate();
@@ -40,7 +40,13 @@ const Login: FC = () => {
   return isLoadingAuth ? (
     <>Loading&hellip;</>
   ) : (
-    <Flexbox centering style={{ width: '100%', height: '100%' }}>
+    <Box
+      sx={{
+        ...spreads.flex,
+        ...spreads.full,
+        ...spreads.centering,
+      }}
+    >
       <Button
         variant="contained"
         size="large"
@@ -57,7 +63,7 @@ const Login: FC = () => {
       >
         Log in
       </Button>
-    </Flexbox>
+    </Box>
   );
 };
 export default Login;
