@@ -10,7 +10,6 @@ import {
   Toolbar,
   Typography,
 } from '@mui/material';
-import { pink } from '@mui/material/colors';
 import { type FC } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSidebar, useTitle } from 'util/context';
@@ -60,8 +59,8 @@ const Header: FC = () => {
             navigate(`/me`);
           }}
         >
-          <Avatar sx={{ bgcolor: pink[400] }}>
-            <AccountCircleIcon />
+          <Avatar sx={{ bgcolor: 'transparent' }}>
+            <AccountCircleIcon fontSize="large" />
           </Avatar>
         </Button>
       </Toolbar>
