@@ -12,11 +12,16 @@ import pages from 'components/pages';
 import spreads from 'util/spreads';
 import { usePouch } from 'util/pouch';
 import { AppContext } from 'util/context';
+import Spacer from 'components/common/Spacer';
+import { Login, Logout } from '@mui/icons-material';
+import { auth, useAuth } from 'util/firebase/auth';
+import snack from 'util/notify';
 
 const Sidebar: FC = () => {
   const [expanded] = usePouch(AppContext, 'sidebarExpanded');
   const drawerWidth = expanded ? 200 : 0;
   const transition = 'width 0.2s';
+  const { isAuthenticated } = useAuth();
   return (
     <Drawer
       variant="permanent"
@@ -32,7 +37,10 @@ const Sidebar: FC = () => {
       }}
     >
       <Toolbar />
-      <List component="nav">
+      <List
+        component="nav"
+        sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}
+      >
         {Object.values(pages).map(
           ({ path, title, sidebarIcon: Icon }) =>
             Icon !== undefined && (
@@ -46,6 +54,31 @@ const Sidebar: FC = () => {
                 </ListItemButton>
               </Link>
             )
+        )}
+        <Spacer />
+        {isAuthenticated ? (
+          <ListItemButton
+            sx={{ flexGrow: 0 }}
+            onClick={() => {
+              auth.signOut().catch(snack.catch);
+            }}
+          >
+            {/* todo: highlight/bold matching route sx={{ bgcolor: (theme) => theme.palette.grey[200] }} */}
+            <ListItemIcon>
+              <Logout />
+            </ListItemIcon>
+            <ListItemText primary="Log Out" />
+          </ListItemButton>
+        ) : (
+          <Link to={pages.login.path} style={spreads.resetLink}>
+            <ListItemButton sx={{ flexGrow: 0 }}>
+              {/* todo: highlight/bold matching route sx={{ bgcolor: (theme) => theme.palette.grey[200] }} */}
+              <ListItemIcon>
+                <Login />
+              </ListItemIcon>
+              <ListItemText primary="Log In" />
+            </ListItemButton>
+          </Link>
         )}
       </List>
     </Drawer>
