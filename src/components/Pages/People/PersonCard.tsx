@@ -13,7 +13,6 @@ import { Link } from 'react-router-dom';
 import { getPersonPosition, type APIPerson } from 'util/api';
 import pages from 'components/pages';
 import Spacer from 'components/common/Spacer';
-import spreads from 'util/spreads';
 
 const Person: FC<{ id: string; value: APIPerson }> = ({
   id,
@@ -41,7 +40,7 @@ const Person: FC<{ id: string; value: APIPerson }> = ({
         image={person.picture}
       />
       <CardContent>
-        <Box sx={{ ...spreads.flex, flexWrap: 'wrap' }}>
+        <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
           <Typography variant="body2" color="text.secondary">
             {person.major !== null && `Major: ${person.major}`}
           </Typography>

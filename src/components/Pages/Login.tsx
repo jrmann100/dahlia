@@ -42,7 +42,6 @@ const Login: FC = () => {
   ) : (
     <Box
       sx={{
-        ...spreads.flex,
         ...spreads.full,
         ...spreads.centering,
       }}
