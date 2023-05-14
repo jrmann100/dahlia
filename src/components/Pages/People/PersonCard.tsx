@@ -26,10 +26,10 @@ const Person: FC<{ id: string; value: APIPerson }> = ({
             {`${person.name
               .split(' ')
               .map((x) => x[0])
-              .join('')} ${getShortYear(person)}`}
+              .join('')}`}
           </Avatar>
         }
-        title={person.name}
+        title={`${person.name} ${getShortYear(person)}`}
         subheader={getPersonPosition(person)}
       />
       <CardMedia
