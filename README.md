@@ -1,46 +1,34 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# [Dahlia](https://dahlia-web.web.app/)
 
-## Available Scripts
+Connecting DALI Lab members digitally since 2023.
 
-In the project directory, you can run:
+This project was built for the [DALI Lab Social Media Challenge](https://github.com/dali-lab/dali-challenges/blob/main/docs/WebAndMobileChallenges/SocialMediaChallenge.md). It is a full-stack serverless app built on Firebase and using [Create-React-App](https://create-react-app.dev/), [TypeScript](https://www.typescriptlang.org/), [React Router](https://reactrouter.com/en/main), and [Material UI](https://mui.com/material-ui/).
 
-### `yarn start`
+By [@jrmann100](https://github.com/jrmann100)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Objectives
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- [x] Present a [dataset](https://github.com/dali-lab/dali-challenges/blob/master/data/DALI_Data.json) of user profile data using a clean UI.<br>Organized the product into components and views using React, supercharging a custom-built interface with reactive Typescript.
+- [x] Use Firebase to organize data.<br>Firebase Firestore provided the framework to [organize the data](data/data.json) into a document-based database, with custom security rules to prevent tampering.
+- [x] Use React Hooks to extend the abilities of the code. <br>Create [custom hooks](src/util/pouch.tsx) to manage React Context
+- [x] Organize the site into [key views](src/pages) and route efficiently. 
+- [x] Deploy [the site](https://dahlia-web.web.app) on Firebase Hosting.
+- [x] Integrate Firebase Auth/Google OAuth for a personalized experience.<br>Add Google Sign-In for quick authentication. Link Firestore profiles to user accounts.
 
-### `yarn test`
+## Building and Deploying
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Build the project:
+```bash
+yarn && yarn build
+```
 
-### `yarn build`
+Preview locally:
+```bash
+yarn start
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+(Maintainers only) deploy the product:
+```bash
+firebase deploy
+```
