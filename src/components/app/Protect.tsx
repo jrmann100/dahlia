@@ -22,11 +22,7 @@ export const Protect: FC<
   }, [enabled, isAuthenticated, isLoadingAuth, navigate, path, setLoading]);
 
   return (
-    <>
-      {!enabled || (!isLoadingAuth && isAuthenticated)
-        ? children
-        : 'Loading...'}
-    </>
+    <>{!enabled || (!isLoadingAuth && isAuthenticated) ? children : null}</>
   );
 };
 
