@@ -7,7 +7,6 @@ import {
 } from 'firebase/auth';
 import { auth, useAuth } from 'util/firebase/auth';
 import snack from 'util/notify';
-import pages from 'components/pages';
 import { Box, Button } from '@mui/material';
 import spreads from 'util/spreads';
 
