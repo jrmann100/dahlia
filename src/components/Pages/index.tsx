@@ -9,16 +9,14 @@ import {
   Person as PersonIcon,
 } from '@mui/icons-material';
 
-const pages: Record<
-  string,
-  {
-    path: string;
-    component: ReactNode;
-    needsAuth?: boolean;
-    title?: string;
-    sidebarIcon?: SvgIconComponent;
-  }
-> = {
+export interface Page {
+  path: string;
+  component: ReactNode;
+  needsAuth?: boolean;
+  title?: string;
+  sidebarIcon?: SvgIconComponent;
+}
+const pages: Record<string, Page> = {
   people: {
     path: '/people',
     component: <People />,
