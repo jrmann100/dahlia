@@ -40,8 +40,11 @@ export function getPersonPosition(person: APIPerson): string {
 }
 
 export function getShortYear({ year }: APIPerson): string {
-  if (/\d{4}/.test(year)) {
+  if (/^\d{4}$/.test(year)) {
     return `'${year.substring(2)}`;
   }
-  return year;
+  if (/^'?\d{2}$/.test(year)) {
+    return `'${year}`;
+  }
+  return `(${year})`;
 }
