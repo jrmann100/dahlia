@@ -1,4 +1,3 @@
-import { CircularProgress } from '@mui/material';
 import { doc, getDoc } from 'firebase/firestore/lite';
 import { useState, type FC, useEffect } from 'react';
 import { useParams } from 'react-router-dom';

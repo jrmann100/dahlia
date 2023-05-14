@@ -1,4 +1,4 @@
-import { CircularProgress, Grid, LinearProgress } from '@mui/material';
+import { Grid } from '@mui/material';
 import Person from 'components/pages/People/PersonCard';
 import { collection, getDocs } from 'firebase/firestore/lite';
 import { useEffect, type FC, useState } from 'react';
