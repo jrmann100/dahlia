@@ -18,6 +18,8 @@ const Person: FC = () => {
     },
     [person, setTitle]
   );
+
+  const [, setLoading] = usePouch(AppContext, 'showLoader');
   useEffect(() => {
     if (id === undefined) {
       return;
@@ -31,11 +33,15 @@ const Person: FC = () => {
         setPerson(null);
       });
   }, [id]);
+
+  useEffect(() => {
+    setLoading(person === undefined);
+  }, [person, setLoading]);
   if (id === null) {
     return <>Error: no ID param given.</>;
   }
   if (person === undefined) {
-    return <CircularProgress />;
+    return <>Loading...</>;
   }
   if (person === null) {
     return <>{person ?? `No person found for id "${id ?? '[undefined]'}".`}</>;

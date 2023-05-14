@@ -1,27 +1,33 @@
-import { Box, Container, styled } from '@mui/material';
+import { Box, styled } from '@mui/material';
+import Loading from 'components/app/Loading';
 import { type FC } from 'react';
 import { Outlet } from 'react-router-dom';
-import spreads from 'util/spreads';
 
 const AppBarOffset = styled('div')(({ theme }) => theme.mixins.toolbar);
 const Main: FC = () => (
   <Box
     component="main"
     sx={{
-      backgroundColor: (theme) =>
-        theme.palette.mode === 'light'
-          ? theme.palette.grey[100]
-          : theme.palette.grey[900],
-      ...spreads.fill,
+      backgroundColor: (theme) => theme.palette.grey[100],
+      flexGrow: 1,
       overflow: 'auto',
-      ...spreads.flex,
+      display: 'flex',
       flexDirection: 'column',
     }}
   >
     <AppBarOffset />
-    <Container sx={{ p: 4, flexGrow: 1 }}>
+    <Box
+      sx={{
+        p: 4,
+        flexGrow: 1,
+        maxHeight: '100vh',
+        overflowY: 'scroll',
+        position: 'relative',
+      }}
+    >
       <Outlet />
-    </Container>
+      <Loading />
+    </Box>
   </Box>
 );
 
