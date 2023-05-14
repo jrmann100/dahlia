@@ -1,5 +1,5 @@
 import { Grid } from '@mui/material';
-import Person from 'components/pages/People/PersonCard';
+import PersonCard from 'components/pages/People/PersonCard';
 import { collection, getDocs } from 'firebase/firestore/lite';
 import { useEffect, type FC, useState } from 'react';
 import { type APIPerson } from 'util/api';
@@ -36,7 +36,7 @@ const People: FC = () => {
     <Grid container spacing={2} justifyContent="space-around">
       {people.map(({ id, person }) => (
         <Grid item key={id} flexGrow={1} flexShrink={0}>
-          <Person id={id} value={person} />
+          <PersonCard id={id} value={person} />
         </Grid>
       ))}
     </Grid>
