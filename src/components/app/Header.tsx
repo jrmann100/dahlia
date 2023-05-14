@@ -1,22 +1,14 @@
 import {
   Menu as MenuIcon,
-  AccountCircle as AccountCircleIcon,
+  MenuOpen as MenuOpenIcon,
 } from '@mui/icons-material';
-import {
-  AppBar,
-  Avatar,
-  Button,
-  IconButton,
-  Toolbar,
-  Typography,
-} from '@mui/material';
+import { AppBar, IconButton, Toolbar, Typography } from '@mui/material';
 import { type FC } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { AppContext } from 'util/context';
 import { usePouch } from 'util/pouch';
 
 const Header: FC = () => {
-  const navigate = useNavigate();
   const [title] = usePouch(AppContext, 'pageTitle');
   const [sidebarExpanded, setSidebarExpanded] = usePouch(
     AppContext,
@@ -36,7 +28,7 @@ const Header: FC = () => {
             setSidebarExpanded(!sidebarExpanded);
           }}
         >
-          <MenuIcon />
+          {sidebarExpanded ? <MenuOpenIcon /> : <MenuIcon />}
         </IconButton>
         <Typography
           component="h1"
@@ -58,15 +50,6 @@ const Header: FC = () => {
         >
           {title}
         </Typography>
-        <Button
-          onClick={() => {
-            navigate(`/me`);
-          }}
-        >
-          <Avatar sx={{ bgcolor: 'transparent' }}>
-            <AccountCircleIcon fontSize="large" />
-          </Avatar>
-        </Button>
       </Toolbar>
     </AppBar>
   );
