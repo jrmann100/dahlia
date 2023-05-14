@@ -1,12 +1,10 @@
 import Me from 'components/pages/Me';
-import Home from 'components/pages/Home';
 import People from 'components/pages/People';
 import Login from 'components/pages/Login';
 import { type ReactNode } from 'react';
 import Person from 'components/pages/Person';
 import {
   type SvgIconComponent,
-  Home as HomeIcon,
   Contacts as ContactsIcon,
   Person as PersonIcon,
 } from '@mui/icons-material';
@@ -21,13 +19,6 @@ const pages: Record<
     sidebarIcon?: SvgIconComponent;
   }
 > = {
-  home: {
-    path: '/home',
-    component: <Home />,
-    needsAuth: true,
-    title: 'Home',
-    sidebarIcon: HomeIcon,
-  },
   people: {
     path: '/people',
     component: <People />,
@@ -48,4 +39,5 @@ const pages: Record<
   },
   login: { path: '/login', component: <Login />, title: 'Log in' },
 };
+
 export default pages;

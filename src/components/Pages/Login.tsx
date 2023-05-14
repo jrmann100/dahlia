@@ -25,7 +25,7 @@ const Login: FC = () => {
     }
     // if logged in already
     if (isAuthenticated) {
-      navigate(next === 'login' || next === null ? pages.home.path : next);
+      navigate(next === 'login' || next === null ? '/' : next);
       return;
     }
     getRedirectResult(auth)

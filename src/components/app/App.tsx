@@ -14,7 +14,7 @@ const App: FC = () => (
     <AuthContextProvider>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<Navigate to={pages.home.path} replace />} />
+          <Route index element={<Navigate to={pages.people.path} replace />} />
           {Object.values(pages).map(
             ({ path, component, title, needsAuth = false }) => (
               <Route
