@@ -38,3 +38,10 @@ export function getPersonPosition(person: APIPerson): string {
     person.mentor && roles.length > 1 ? ', and ' : ' '
   }${person.mentor ? 'Mentor' : ''}`;
 }
+
+export function getShortYear({ year }: APIPerson): string {
+  if (/\d{4}/.test(year)) {
+    return `'${year.substring(2)}`;
+  }
+  return year;
+}

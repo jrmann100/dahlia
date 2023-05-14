@@ -10,7 +10,7 @@ import {
 } from '@mui/material';
 import { type FC } from 'react';
 import { Link } from 'react-router-dom';
-import { getPersonPosition, type APIPerson } from 'util/api';
+import { getPersonPosition, type APIPerson, getShortYear } from 'util/api';
 import pages from 'components/pages';
 import Spacer from 'components/common/Spacer';
 
@@ -23,10 +23,10 @@ const Person: FC<{ id: string; value: APIPerson }> = ({
       <CardHeader
         avatar={
           <Avatar aria-label="recipe" src={person.picture}>
-            {person.name
+            {`${person.name
               .split(' ')
               .map((x) => x[0])
-              .join('')}
+              .join('')} ${getShortYear(person)}`}
           </Avatar>
         }
         title={person.name}
@@ -44,7 +44,7 @@ const Person: FC<{ id: string; value: APIPerson }> = ({
           <Typography variant="body2" color="text.secondary">
             {person.major !== null && `Major: ${person.major}`}
           </Typography>
-          <Spacer basis="1rem" />
+          <Spacer basis="0" />
           <Typography variant="body2" color="text.secondary">
             {person.minor !== null && `Minor: ${person.minor}`}
           </Typography>
