@@ -2,7 +2,7 @@ import { getAuth, onAuthStateChanged, type User } from '@firebase/auth';
 import { useEffect, useContext, useCallback } from 'react';
 import { type APIPerson } from 'util/api';
 import snack from 'util/notify';
-import { createPouch } from 'util/pouch';
+import { createPouch, usePouch } from 'util/pouch';
 
 type NullableUser = User | null | undefined;
 interface AuthContextValue {
@@ -35,7 +35,7 @@ export const useAuth = (): {
   isAuthenticated: boolean;
   isLoadingAuth: boolean;
 } => {
-  const { user } = useContext(AuthContext);
+  const [user] = usePouch(AuthContext, 'user');
 
   return {
     user,
