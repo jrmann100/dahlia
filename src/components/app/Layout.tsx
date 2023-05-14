@@ -11,7 +11,7 @@ const theme = createTheme();
 const Layout: FC = () => (
   <SnackbarProvider preventDuplicate maxSnack={3}>
     <ThemeProvider theme={theme}>
-      <Box sx={{ ...spreads.flex, ...spreads.full }}>
+      <Box sx={{ display: 'flex', ...spreads.full }}>
         <CssBaseline />
         <Header />
         <Sidebar />
