@@ -1,11 +1,13 @@
+import { Box, Typography } from '@mui/material';
 import { doc, getDoc } from 'firebase/firestore/lite';
 import { useState, type FC, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { type APIPerson } from 'util/api';
+import { getPersonPosition, type APIPerson, getShortYear } from 'util/api';
 import { AppContext } from 'util/context';
 import { db } from 'util/firebase/config';
 import snack from 'util/notify';
 import { usePouch } from 'util/pouch';
+import spreads from 'util/spreads';
 
 const Person: FC = () => {
   const { id } = useParams();
@@ -45,6 +47,107 @@ const Person: FC = () => {
   if (person === null) {
     return <>{person ?? `No person found for id "${id ?? '[undefined]'}".`}</>;
   }
-  return <>{person.name}</>;
+  return (
+    <Box
+      sx={{
+        display: 'flex',
+        justifyContent: 'center',
+        flexWrap: 'wrap',
+        gap: 2,
+        ...spreads.full,
+      }}
+    >
+      <Box
+        sx={{
+          backgroundImage: `url(${person.picture})`,
+          flexBasis: '20rem',
+          minHeight: '20rem',
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'contain',
+          backgroundPosition: 'top center',
+          height: 'auto',
+          flexGrow: 1,
+        }}
+      />
+      <Box
+        sx={{
+          flex: 1,
+          flexBasis: '60%',
+          padding: '2rem',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '1rem',
+          maxWidth: 'fit-content',
+          ...spreads.bordered,
+        }}
+      >
+        <Box>
+          <Typography variant="h2">
+            {person.name} <small>{getShortYear(person)}</small>
+          </Typography>
+          <Typography variant="subtitle1" fontSize={20}>
+            {getPersonPosition(person)}
+          </Typography>
+        </Box>
+        <Typography
+          fontSize={25}
+          sx={{
+            flex: 1,
+            fontWeight: 'light',
+            fontStyle: 'italic',
+            textAlign: 'right',
+            maxWidth: '80%',
+            alignSelf: 'end',
+            display: 'flex',
+            alignItems: 'center',
+          }}
+        >
+          {person.quote}
+        </Typography>
+        <Box
+          component="table"
+          sx={{
+            ...spreads.bordered,
+            padding: '0.5rem',
+          }}
+        >
+          <Typography variant="h6" component="tr">
+            <th style={{ textAlign: 'left' }}>
+              {person.major?.length > 0 && 'Major'}
+            </th>
+            <th style={{ textAlign: 'right' }}>
+              {person.minor?.length > 0 && 'Minor'}
+            </th>
+          </Typography>
+          <Typography variant="body1" component="tr">
+            <td style={{ textAlign: 'left' }}>{person.major}</td>
+            <td style={{ textAlign: 'right' }}>{person.minor}</td>
+          </Typography>
+        </Box>
+
+        <Box
+          component="table"
+          sx={{
+            ...spreads.bordered,
+            padding: '0.5rem',
+          }}
+        >
+          {/* todo: tabs */}
+          <Typography variant="h6" component="tr">
+            <th style={{ textAlign: 'left' }}>Favorite Things</th>
+          </Typography>
+          <Typography variant="body1" component="tr">
+            <td style={{ textAlign: 'left' }}>{person['favorite thing 1']}</td>
+          </Typography>
+          <Typography variant="body1" component="tr">
+            <td style={{ textAlign: 'left' }}>{person['favorite thing 2']}</td>
+          </Typography>
+          <Typography variant="body1" component="tr">
+            <td style={{ textAlign: 'left' }}>{person['favorite thing 3']}</td>
+          </Typography>
+        </Box>
+      </Box>
+    </Box>
+  );
 };
 export default Person;
