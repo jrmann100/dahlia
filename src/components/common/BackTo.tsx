@@ -5,6 +5,7 @@ import { type CSSProperties, type FC } from 'react';
 import { Link } from 'react-router-dom';
 import spreads from 'util/spreads';
 
+// todo: replace with breadcrumbs if possible. this won't pop history so it's unfriendly for scroll restoration.
 const BackTo: FC<{ page: Page; title?: string; style?: CSSProperties }> = ({
   page: { path, title: pageTitle },
   title: givenTitle,
