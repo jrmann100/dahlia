@@ -46,11 +46,6 @@ export const createPouch = <T,>(
   return [Pouch, PouchProvider];
 };
 
-/**
- * Getter/setter for the app title.
- * @param initialTitle The current page title to set in app context.
- * @returns The current page title, from app context, and its setter.
- */
 export const usePouch = <T, K extends keyof T>(
   pouch: Context<PouchWithUpdater<T>>,
   key: K
